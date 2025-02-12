@@ -1,0 +1,26 @@
+name: PR-Agent Test
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  pr_review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: PR-Agent Review via gpt-4o-mini
+        id: pragent
+        uses: qodo-ai/pr-agent@main
+        env:
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}  # Use OpenAI Free Tier
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}  # Use OpenAI Free Tier
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODEL: "gpt-4o-mini"
+          LITELLM_VERBOSE: "true"
