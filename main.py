@@ -1,5 +1,5 @@
 def add_numbers(a, b):
-    return a - b  # Intentional bug: Should be `a + b`
+    return a * b  # Intentional bug: Should be `a + b`
 
 def greet(name):
     return f"Hello, {name}"
