@@ -1,24 +1,24 @@
-name: PR-Agent
+name: PR-Agent Test
 
 on:
   pull_request:
     types: [opened, synchronize]
-  issue_comment:
-    types: [created]
 
 permissions:
   issues: write
   pull-requests: write
 
 jobs:
-  pr_agent_job:
+  pr_review_test:
     runs-on: ubuntu-latest
-    name: Run PR-Agent with Free Model
     steps:
-      - name: PR Agent action step
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: PR-Agent Review with Gemini
         id: pragent
         uses: qodo-ai/pr-agent@main
         env:
-          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          GCP_API_KEY: ${{ secrets.GCP_API_KEY }}  # Store Gemini API key as a secret
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MODEL: "gpt-3.5-turbo"  # Specify the free-tier model
+          MODEL: "gemini-pro"  # Use Gemini instead of OpenAI models
