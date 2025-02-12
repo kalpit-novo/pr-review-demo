@@ -9,17 +9,16 @@ permissions:
   pull-requests: write
 
 jobs:
-  pr_review_test:
+  pr_review:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: PR-Agent Review with Gemini
+      - name: PR-Agent Review via gpt-4o-mini
         id: pragent
         uses: qodo-ai/pr-agent@main
         env:
-          GCP_API_KEY: ${{ secrets.GCP_API_KEY }}  # Store Gemini API key as a secret
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}  # Use OpenAI Free Tier
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MODEL: "gemini-pro"  # Ensure the model is correct
-          PROVIDER: "google"  # Explicitly tell PR-Agent to use Google AI
+          MODEL: "gpt-4o-mini"  # Use the best available model
