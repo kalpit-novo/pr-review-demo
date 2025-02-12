@@ -21,4 +21,5 @@ jobs:
         env:
           GCP_API_KEY: ${{ secrets.GCP_API_KEY }}  # Store Gemini API key as a secret
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MODEL: "gemini-pro"  # Use Gemini instead of OpenAI models
+          MODEL: "gemini-pro"  # Ensure the model is correct
+          PROVIDER: "google"  # Explicitly tell PR-Agent to use Google AI
